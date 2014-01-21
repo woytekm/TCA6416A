@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 #include "i2c_lib.h"
-#include "tca6416.h"
+#include "tca6416a.h"
 
 
 #define I2C_FILE_NAME "/dev/i2c-1"
@@ -25,14 +25,14 @@ int main(int argc, char **argv) {
         exit(1);
     }
 
-  tca6416_set_gpio(i2c_dev,TCA6416_I2C_ADDR_LO,TCA6416_GPIO13, TCA6416_GPIO_OUT);
+  tca6416a_set_gpio(i2c_dev,TCA6416A_I2C_ADDR_LO,TCA6416A_GPIO13, TCA6416A_GPIO_OUT);
 
   while (counter < 10)
    {
 
-     tca6416_out_gpio(i2c_dev,TCA6416_I2C_ADDR_LO,TCA6416_GPIO13,0);
+     tca6416a_out_gpio(i2c_dev,TCA6416A_I2C_ADDR_LO,TCA6416A_GPIO13,0);
      sleep(1);
-     tca6416_out_gpio(i2c_dev,TCA6416_I2C_ADDR_LO,TCA6416_GPIO13,1);
+     tca6416a_out_gpio(i2c_dev,TCA6416A_I2C_ADDR_LO,TCA6416A_GPIO13,1);
      sleep(1);
      counter++;
   }

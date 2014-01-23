@@ -71,7 +71,7 @@ uint8_t set_i2c_register(int file,
 
     outbuf[1] = value;
 
-    if(debug)
+    if(i2c_debug)
      printf("set_i2c_register params: addr: 0x%x, reg: 0x%x, val: 0x%x\n", addr, reg, value); 
 
     /* Transfer the i2c packets to the kernel and verify it worked */

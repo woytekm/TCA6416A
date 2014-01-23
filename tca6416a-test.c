@@ -15,9 +15,10 @@
 #define I2C_FILE_NAME "/dev/i2c-1"
 
 
-int main(int argc, char **argv) {
-    int i2c_dev;
+int main() {
     int counter = 0;
+
+    i2c_debug = 0;
 
     // Open a connection to the I2C userspace control file.
     if ((i2c_dev = open(I2C_FILE_NAME, O_RDWR)) < 0) {
@@ -37,10 +38,9 @@ int main(int argc, char **argv) {
      counter++;
   }
 
-
   close(i2c_dev);
-
 
   return 0;
 }
+
 

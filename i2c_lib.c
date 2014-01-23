@@ -57,7 +57,7 @@ uint8_t set_i2c_register(int file,
 
     messages[0].addr  = addr;
     messages[0].flags = 0;
-    messages[0].len   = sizeof(outbuf);
+    messages[0].len   = 2;
     messages[0].buf   = outbuf;
 
     /* The first byte indicates which register we'll write */
@@ -68,6 +68,7 @@ uint8_t set_i2c_register(int file,
      * devices, we can write multiple, sequential registers at once by
      * simply making outbuf bigger.
      */
+
     outbuf[1] = value;
 
     if(debug)
@@ -89,6 +90,7 @@ uint8_t get_i2c_register(int file,
                             unsigned char addr,
                             unsigned char reg,
                             unsigned char *val) {
+
     unsigned char inbuf, outbuf;
     struct i2c_rdwr_ioctl_data packets;
     struct i2c_msg messages[2];
@@ -98,16 +100,17 @@ uint8_t get_i2c_register(int file,
      * 0 bytes to the register we want to read from.  This is similar to
      * the packet in set_i2c_register, except it's 1 byte rather than 2.
      */
+
     outbuf = reg;
     messages[0].addr  = addr;
     messages[0].flags = 0;
-    messages[0].len   = sizeof(outbuf);
+    messages[0].len   = 1;
     messages[0].buf   = &outbuf;
 
     /* The data will get returned in this structure */
     messages[1].addr  = addr;
     messages[1].flags = I2C_M_RD/* | I2C_M_NOSTART*/;
-    messages[1].len   = sizeof(inbuf);
+    messages[1].len   = 1;
     messages[1].buf   = &inbuf;
 
     /* Send the request to the kernel and get the result back */

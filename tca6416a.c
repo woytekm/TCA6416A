@@ -18,12 +18,12 @@ uint8_t tca6416a_read_gpio(int i2cdev, uint8_t ic_addr, uint8_t gpio)
 
    unsigned char in_bank, out_bank, current_bank_state;
 
-   if((gpio > 7) && (gpio < TCA6416A_MAX_GPIO)) // bank 1
+   if((gpio > 7) && (gpio <= TCA6416A_MAX_GPIO)) // bank 1
     {
      gpio -= 8; // shift GPIO number for bank 1
      in_bank = TCA6416A_INPUT_BANK_1;
     }
-   else if((gpio > 0) && (gpio < 8))
+   else if((gpio >= 0) && (gpio < 8))
     {
      in_bank = TCA6416A_INPUT_BANK_0;
     }
@@ -45,13 +45,13 @@ uint8_t tca6416a_out_gpio(int i2cdev, uint8_t ic_addr, uint8_t gpio, uint8_t sta
  {
    unsigned char in_bank, out_bank, *current_bank_state;
 
-   if((gpio > 7) && (gpio < TCA6416A_MAX_GPIO)) // bank 1
+   if((gpio > 7) && (gpio <= TCA6416A_MAX_GPIO)) // bank 1
     {
      gpio -= 8; // shift GPIO number for bank 1
      out_bank = TCA6416A_OUTPUT_BANK_1;
      current_bank_state =  &input_regs_bank_1;
     }
-   else if((gpio > 0) && (gpio < 8))
+   else if((gpio >= 0) && (gpio < 8))
     {
      out_bank = TCA6416A_OUTPUT_BANK_0;
      current_bank_state = &input_regs_bank_0;
@@ -79,13 +79,13 @@ uint8_t tca6416a_set_gpio(int i2cdev, uint8_t ic_addr, uint8_t gpio, uint8_t mod
  {
    unsigned char in_bank, out_bank, *current_bank_state;
 
-   if((gpio > 7) && (gpio < TCA6416A_MAX_GPIO)) // bank 1
+   if((gpio > 7) && (gpio <= TCA6416A_MAX_GPIO)) // bank 1
     {
      gpio -= 8; // shift GPIO number for bank 1
      out_bank = TCA6416A_CONFIG_BANK_1;
      current_bank_state =  &input_regs_bank_1;
     }
-   else if((gpio > 0) && (gpio < 8))
+   else if((gpio >= 0) && (gpio < 8))
     {
      out_bank = TCA6416A_CONFIG_BANK_0;
      current_bank_state =  &input_regs_bank_0;
